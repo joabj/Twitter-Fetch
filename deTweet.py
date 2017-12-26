@@ -2,13 +2,19 @@
 #the text, time, location, and Tweet ID. In this case for printing onto the screen, but can be piped elsewhere.
 #Eventually optional attributes, such as a photos, will also be included. 
 #
+#Running from the command line, the program needs the name of the .json file where the timeline has been stored (by Fetch.py
+#in my own setup) i.e. "deTweet.py 170602.json")
+#
 #Also, this program captues, and writes to a text file the ID of the last Tweet, which will be useful for fetching new data only
-#since the last date. 
+#since the last date. This may be moved somewhere else eventually.
  
 
-
+import sys
 import json
-data = json.load(open('NAME-OF-TWEET-FILE.json'))
+
+tweetFile = str(sys.argv[1])
+data = json.load(open(tweetFile))
+
 tweetCount = len(data)
 i = 0
 
