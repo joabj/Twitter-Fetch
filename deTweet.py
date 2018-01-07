@@ -23,7 +23,7 @@ while i < len(data):
 	tweet = data[i]["text"]
 	tweetLocale = data[i]["coordinates"]
 	tweetTime = data[i]["created_at"]
-	print tweet
+	print tweet.encode('utf-8')
 	print tweetNumber
 	print tweetLocale
 	print tweetTime
