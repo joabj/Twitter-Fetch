@@ -12,9 +12,15 @@
 import sys
 import json
 
-tweetFile = str(sys.argv[1])
-data = json.load(open(tweetFile))
 
+tweetFile = str(sys.argv[1])
+
+#Create an HTML file
+HTMLFilePrep = tweetFile.split('.')
+HTMLFile = HTMLFilePrep[0]+".html"
+target = open(HTMLFile, 'w')
+
+data = json.load(open(tweetFile))
 tweetCount = len(data)
 i = 0
 
@@ -23,15 +29,30 @@ while i < len(data):
 	tweet = data[i]["text"]
 	tweetLocale = data[i]["coordinates"]
 	tweetTime = data[i]["created_at"]
-	print tweet.encode('utf-8')
-	print tweetNumber
-	print tweetLocale
-	print tweetTime
-	print "  "
+	target.write(tweet.encode('utf-8'))
+	target.write("<p>")	
+	target.write(str(tweetNumber))
+	target.write("<p>")	
+	target.write(str(tweetLocale))
+	target.write("<p>")	
+	target.write(str(tweetTime))
+	target.write ("</p>")
+	target.write("<p>")	
 	i = i + 1
+	
+	
+	
+#Close the file:
+target.write("</table></center>")	
+target.write("<img id=ImageCenter src=/Tilde-Color.jpg  height=27 width=60><p>")	
+target.close()
 
 #Capture the ID of the last Tweet 
 LastTweet = str(data[0]["id"])
 f = open("LastTweet.txt", 'w')
 f.write(LastTweet)
 f.close()
+
+
+
+#http://www.pythonforbeginners.com/system/python-sys-argv
